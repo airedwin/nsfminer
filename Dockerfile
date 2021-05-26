@@ -6,7 +6,6 @@ WORKDIR /
 # Package and dependency setup
 RUN apt-get update \
     && apt-get -y install software-properties-common \
-    && add-apt-repository -y ppa:ethereum/ethereum -y \
     && apt-get update \
     && apt-get install -y git \
      cmake \
