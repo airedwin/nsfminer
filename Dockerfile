@@ -1,4 +1,5 @@
-FROM nvidia/cuda:10.1-devel-ubuntu16.04
+FROM nvidia/cuda:11.3.0-cudnn8-devel-ubuntu18.04
+
 MAINTAINER Edwin
 WORKDIR /
 
