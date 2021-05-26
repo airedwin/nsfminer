@@ -1,0 +1,2 @@
+# nsfminer
+dockerk for nsfminer
