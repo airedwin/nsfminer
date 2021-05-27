@@ -5,37 +5,14 @@ WORKDIR /
 
 # Package and dependency setup
 RUN apt-get update \
-    && apt-get -y install software-properties-common \
     && apt-get update \
-    && apt-get install -y git \
-     cmake \
-     libcryptopp-dev \
-     libleveldb-dev \
-     libjsoncpp-dev \
-     libjsonrpccpp-dev \
-     libboost-all-dev \
-     libgmp-dev \
-     libreadline-dev \
-     libcurl4-gnutls-dev \
-     ocl-icd-libopencl1 \
-     opencl-headers \
-     mesa-common-dev \
-     libmicrohttpd-dev \
-     build-essential
+    && apt-get install -y wget
 
-# Git repo set up
-RUN git clone https://github.com/no-fee-ethereum-mining/nsfminer.git; \
-    cd nsfminer; \
-    git checkout tags/v1.3.13; \
-    git submodule update --init --recursive
+# Download
+RUN wget https://github.com/no-fee-ethereum-mining/nsfminer/releases/download/v1.3.13/nsfminer_1.3.13-ubuntu_18.04-cuda_11.2-opencl.tgz
 
-# Build
-RUN cd nsfminer; \
-    mkdir build; \
-    cd build; \
-    cmake .. -DETHASHCUDA=ON -DETHASHCL=OFF -DETHSTRATUM=ON; \
-    cmake --build .; \
-    make install;
+# Extract
+RUN tar zxvf nsfminer_1.3.13-ubuntu_18.04-cuda_11.2-opencl.tgz -C /usr/local/bin
 
 # Env setup
 ENV GPU_FORCE_64BIT_PTR=0
